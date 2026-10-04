@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useCircuitContext, useHillCoefficientContext, useWindowStateContext } from '../../hooks';
+import { useBrickBench } from '../../brick/BrickBenchContext';
 import { fetchOutput, formatBackendJson, formatCircuitExportJson, abortFetch } from "../../utils"
 import { turingPatternSimulatorHref } from "../../utils/turingPatternSimulatorHref";
 import { saveCircuitAsImage } from "./SaveImage"; // Import our new function
@@ -47,6 +48,7 @@ const TopRibbon: React.FC = () => {
         activeTab, setActiveTab
     } = useWindowStateContext();
     const { showAlert } = useAlert();
+    const { clearBench } = useBrickBench();
 
     const [showClearConfirmation, setShowClearConfirmation] = useState(false); // Track whether clear confirmation window is open or not
     const [isRunning, setIsRunning] = useState(false) // Track if simulation is running or not
@@ -59,6 +61,7 @@ const TopRibbon: React.FC = () => {
     const confirmClear = () => {
         setNodes([])
         setEdges([])
+        clearBench()
         if (activeTab === "properties") {
             setActiveTab("toolbox");
         }

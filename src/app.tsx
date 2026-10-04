@@ -6,6 +6,7 @@ import { ToolboxProvider } from "./context";
 import { Theme } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
 import { CircuitProvider, SelectionStateProvider, WindowStateProvider, HillCoefficientProvider, useCircuitContext } from './hooks';
+import { BrickBenchProvider } from './brick/BrickBenchContext';
 import React from 'react';
 import { AlertProvider } from "./components/Alerts/AlertProvider";
 
@@ -39,7 +40,9 @@ if (rootElement) {
             <ToolboxProvider>
                 <Theme className="app-shell" appearance='light' accentColor='jade' radius='large' scaling='95%'>
                     <ProvidersWrapper>
-                        <CircuitBuilderFlow />
+                        <BrickBenchProvider>
+                            <CircuitBuilderFlow />
+                        </BrickBenchProvider>
                     </ProvidersWrapper>
                 </Theme>
             </ToolboxProvider>
